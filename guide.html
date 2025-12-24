@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>베트남 여행 & 음식문화 인터랙티브 가이드</title>
+    <style>
+        :root {
+            --primary: #00897B;
+            --secondary: #FF6F00;
+            --bg-body: #F4F6F8;
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --text-sub: #555555;
+            --border: #e0e0e0;
+            --sidebar-width: 280px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        [data-theme="dark"] {
+            --primary: #4DB6AC;
+            --secondary: #FFB74d;
+            --bg-body: #121212;
+            --bg-card: #1E1E1E;
+            --text-main: #E0E0E0;
+            --text-sub: #B0B0B0;
+            --border: #333333;
+            --shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        * { box-sizing: border-box; transition: background 0.3s, color 0.3s; }
+        body { margin: 0; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: var(--bg-body); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
+
+        /* Sidebar */
+        .sidebar { width: var(--sidebar-width); background: var(--bg-card); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 100; }
+        .logo { padding: 20px; font-size: 1.5rem; font-weight: 800; color: var(--primary); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .search-box { padding: 15px; border-bottom: 1px solid var(--border); }
+        .search-box input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-body); color: var(--text-main); }
+        .menu { flex: 1; overflow-y: auto; list-style: none; padding: 0; margin: 0; }
+        .menu li { padding: 15px 20px; cursor: pointer; border-bottom: 1px solid var(--border); font-size: 0.95rem; display: flex; justify-content: space-between; }
+        .menu li:hover { background: rgba(0,137,123, 0.1); }
+        .menu li.active { background: var(--primary); color: white; border-left: 5px solid var(--secondary); }
+
+        /* Main Content */
+        .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        .header { padding: 15px 30px; background: var(--bg-card); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .content-area { flex: 1; overflow-y: auto; padding: 30px; scroll-behavior: smooth; }
+        
+        .page-card { background: var(--bg-card); padding: 40px; border-radius: 16px; box-shadow: var(--shadow); max-width: 900px; margin: 0 auto; animation: slideUp 0.5s ease; }
+        
+        h1 { margin-top: 0; color: var(--primary); font-size: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { font-size: 1.4rem; color: var(--text-main); margin-top: 30px; }
+        p, li { line-height: 1.8; color: var(--text-sub); font-size: 1.05rem; }
+        
+        /* Interactive Elements */
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; background: var(--primary); color: white; }
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); }
+        .data-table th, .data-table td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border); }
+        .data-table th { background: var(--primary); color: white; }
+        
+        /* Charts */
+        .chart-container { margin: 20px 0; }
+        .bar-group { margin-bottom: 15px; }
+        .bar-label { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; }
+        .bar-bg { background: var(--border); height: 24px; border-radius: 12px; overflow: hidden; }
+        .bar-fill { height: 100%; background: var(--secondary); width: 0; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        /* Accordion */
+        .accordion { background: rgba(0,0,0,0.03); border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+        .accordion-header { padding: 15px; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; }
+        .accordion-body { padding: 0 15px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid transparent; }
+        .accordion.open .accordion-body { padding-bottom: 15px; max-height: 500px; border-color: var(--border); }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn { padding: 10px 20px; border: 1px solid var(--border); background: var(--bg-card); cursor: pointer; border-radius: 20px; color: var(--text-sub); }
+        .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s; }
+
+        /* Calculator */
+        .calc-wrapper { display: flex; gap: 20px; align-items: center; background: rgba(0,137,123,0.1); padding: 20px; border-radius: 12px; }
+        .calc-input { font-size: 1.5rem; padding: 10px; width: 200px; border: 2px solid var(--primary); border-radius: 8px; background: var(--bg-card); color: var(--text-main); }
+        
+        /* Checklist */
+        .checklist-item { padding: 12px; border: 1px solid var(--border); margin-bottom: 8px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; }
+        .checklist-item.checked { background: rgba(0,0,0,0.05); text-decoration: line-through; color: var(--border); }
+        .checklist-item input { margin-right: 15px; transform: scale(1.5); accent-color: var(--primary); }
+
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal { background: var(--bg-card); padding: 30px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; }
+
+        /* Animations */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            body { flex-direction: column; overflow: auto; }
+            .sidebar { width: 100%; height: auto; max-height: 60px; overflow: hidden; transition: max-height 0.3s; }
+            .sidebar.expanded { max-height: 50vh; }
+            .content-area { padding: 15px; }
+            .page-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 사이드바 -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <span>🇻🇳 베트남 완전정복</span>
+            <button id="mobile-menu-btn" class="btn" style="display:none; padding:5px 10px;">☰</button>
+        </div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="키워드 검색 (예: 쌀국수, 환전)" onkeyup="filterMenu()">
+        </div>
+        <ul class="menu" id="menu-list">
+            <!-- 자바스크립트로 메뉴 생성 -->
+        </ul>
+    </aside>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <header class="header">
+            <span id="page-indicator" style="font-weight:bold; color:var(--text-sub)">1 / 20 페이지</span>
+            <div style="display:flex; gap:10px;">
+                <button class="btn btn-outline" onclick="toggleTheme()">🌓 테마 변경</button>
+                <button class="btn" onclick="nextPage()">다음 페이지 👉</button>
+            </div>
+        </header>
+
+        <div class="content-area" id="content-container">
+            <!-- 콘텐츠가 여기에 렌더링 됩니다 -->
+        </div>
+    </main>
+
+    <!-- 퀴즈 모달 -->
+    <div class="modal-overlay" id="quizModal">
+        <div class="modal">
+            <h2 id="modalTitle">퀴즈</h2>
+            <p id="modalText">내용</p>
+            <button class="btn" onclick="closeModal()">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. 데이터베이스 (20개 섹션 전체)
+        const db = [
+            {
+                id: 1, title: "베트남 음식의 기본 철학",
+                content: `베트남 음식은 단순한 먹거리가 아닌, 음양의 조화와 자연의 섭리를 담은 문화적 산물입니다. 가장 핵심적인 원칙은 '따뜻한 조리'입니다. 고온다습한 기후로 인해 날음식보다는 불을 사용해 굽고, 삶고, 끓인 음식을 선호합니다.`,
+                points: ["음양오행의 조화: 차가운 성질과 뜨거운 성질의 재료 배합", "불의 사용: 소화와 위생을 고려한 익힌 음식 문화", "신선함: 말린 식재료도 반드시 가공하여 신선하게 섭취"],
+                type: "text"
+            },
+            {
+                id: 2, title: "설날 전통: 반쯩과 반자이",
+                content: `베트남의 설날인 '텟(Tet)'에 빠질 수 없는 음식이 바로 반쯩입니다. 사각형 모양은 땅을 상징하며, 찹쌀, 녹두, 돼지고기를 바나나 잎에 싸서 10시간 이상 쪄냅니다. 이는 가족의 화합과 조상에 대한 감사를 의미합니다.`,
+                type: "table",
+                table: { head: ["구분", "반쯩(Banh Chung)", "반자이(Banh Giay)"], body: [["형태", "사각형 (땅)", "원형 (하늘)"], ["의미", "감사, 풍요, 음(-)", "존경, 기원, 양(+)"], ["재료", "찹쌀, 녹두, 돼지고기", "흰 찹쌀떡 형태"]] }
+            },
+            {
+                id: 3, title: "국민 음식: 쌀국수(퍼)와 껌판",
+                content: `쌀국수 '퍼'는 베트남의 영혼입니다. 북부 하노이식은 진한 사골 육수와 단순한 고명을, 남부 호찌민식은 달콤한 맛과 풍성한 허브, 소스를 특징으로 합니다. '껌판'은 밥과 반찬을 곁들이는 베트남식 백반입니다.`,
+                type: "accordion",
+                items: [
+                    { t: "🍜 퍼보 (Phở Bò)", c: "소고기 쌀국수. 국물의 깊은 맛이 핵심이며 아침 식사로 인기." },
+                    { t: "🐔 퍼가 (Phở Gà)", c: "닭고기 쌀국수. 담백하고 깔끔한 맛이 특징." },
+                    { t: "🍚 껌땀 (Cơm Tấm)", c: "깨진 쌀알로 지은 밥에 숯불구이 고기를 얹은 남부 대표 음식." }
+                ]
+            },
+            {
+                id: 4, title: "반미와 라이스 페이퍼",
+                content: `프랑스 식민 시대의 유산인 바게트가 베트남의 식재료와 만나 세계적인 샌드위치 '반미'가 탄생했습니다. 또한, 쌀을 종이처럼 얇게 펴 말린 라이스 페이퍼는 튀기거나(짜조) 생으로 싸 먹는(고이꾸온) 등 무한한 변주가 가능합니다.`,
+                type: "chart",
+                chart: [{l: "반미 선호도", v: 95}, {l: "고이꾸온(월남쌈)", v: 85}, {l: "짜조(튀김만두)", v: 80}]
+            },
+            {
+                id: 5, title: "육류 및 해산물 소비 문화",
+                content: `긴 해안선을 가진 베트남은 수산물의 천국입니다. 하지만 전통적으로 농경 사회였기에 소고기보다는 돼지고기와 닭고기 소비가 훨씬 많습니다. 특히 민물 생선 요리는 베트남 식탁의 단골 메뉴입니다.`,
+                type: "chart",
+                chart: [{l: "돼지고기 소비량", v: 90}, {l: "해산물 소비량", v: 85}, {l: "닭고기 소비량", v: 70}, {l: "소고기 소비량", v: 45}]
+            },
+            {
+                id: 6, title: "달콤한 유혹: 디저트와 커피",
+                content: `세계 2위 커피 생산국인 베트남은 독특한 '카페 쓰아다(연유 커피)' 문화를 가지고 있습니다. 또한 '쩨(Che)'라 불리는 전통 디저트는 콩, 젤리, 코코넛 밀크를 섞어 만든 달콤한 간식으로 더위를 식혀줍니다.`,
+                type: "text",
+                points: ["카페 쓰아다: 진한 로부스타 원두와 달콤한 연유의 조화", "쩨(Chè): 베트남식 팥빙수 또는 단팥죽", "신또(Sinh Tố): 신선한 열대과일 스무디"]
+            },
+            {
+                id: 7, title: "지역별 미식 지도",
+                content: `베트남은 길쭉한 지형만큼이나 지역색이 뚜렷합니다. 북부는 담백하고 짠맛, 중부는 맵고 화려한 맛, 남부는 달고 진한 맛이 특징입니다.`,
+                type: "tabs",
+                tabs: [
+                    {name: "하노이(북부)", content: "본연의 맛 중시. 퍼(쌀국수), 분짜, 반꾸온이 유명합니다."},
+                    {name: "후에(중부)", content: "왕실 요리의 본고장. 맵고 자극적인 분보후에, 반코아이가 대표적."},
+                    {name: "호찌민(남부)", content: "설탕과 코코넛 밀크 사용. 반세오, 껌땀 등 풍요로운 맛."}
+                ]
+            },
+            {
+                id: 8, title: "실전 베트남어 메뉴판 읽기",
+                content: `메뉴판의 단어 몇 개만 알면 실패 없는 주문이 가능합니다. 재료+조리법 공식만 기억하세요.`,
+                type: "quiz", // 퀴즈 기능
+                quiz: { q: "'Cơm(밥) + Gà(닭) + Nướng(구이)'은 무슨 요리일까요?", a: "정답: 닭구이 덮밥 (껌가느엉) 입니다!" }
+            },
+            {
+                id: 9, title: "다낭 & 호이안 5박 6일 루트",
+                content: `휴양과 관광을 모두 잡는 완벽한 일정입니다. 다낭의 도시적인 매력과 호이안의 고즈넉함을 동시에 즐겨보세요.`,
+                type: "tabs",
+                tabs: [
+                    {name: "1-2일차", content: "다낭 도착, 한시장 환전, 핑크 성당, 용다리 야경 감상"},
+                    {name: "3-4일차", content: "오행산 투어 후 호이안 이동. 올드타운 등불 구경 및 야시장"},
+                    {name: "5-6일차", content: "바나 힐 테마파크(골든 브릿지), 롯데마트 쇼핑 후 귀국"}
+                ]
+            },
+            {
+                id: 10, title: "짐 싸기 체크리스트",
+                content: `베트남 여행의 질을 높여줄 필수 아이템들입니다. 잊지 말고 챙기세요!`,
+                type: "checklist",
+                items: ["여권 (유효기간 6개월 이상)", "동지갑 (화폐 정리용)", "샤워기 필터 (수질 대비)", "모기 기피제", "그랩(Grab) 앱 설치 및 카드 등록"]
+            },
+            {
+                id: 11, title: "환전과 화폐 계산기",
+                content: `베트남 동(VND)은 단위가 커서 헷갈리기 쉽습니다. '0을 하나 빼고 2로 나눈다'는 공식을 기억하세요. (예: 100,000동 ≈ 5,000원)`,
+                type: "calculator"
+            },
+            {
+                id: 12, title: "이동수단: 그랩(Grab) 마스터",
+                content: `택시 사기를 피하는 가장 좋은 방법은 '그랩' 앱을 사용하는 것입니다. 출발지와 목적지를 설정하면 요금이 확정되므로 안심할 수 있습니다.`,
+                type: "accordion",
+                items: [
+                    {t: "그랩 카 (Grab Car)", c: "일반 승용차. 4인승과 7인승 선택 가능. 에어컨이 있어 쾌적함."},
+                    {t: "그랩 바이크 (Grab Bike)", c: "오토바이 택시. 저렴하고 빠르지만 헬멧 착용 필수. 혼자일 때 추천."}
+                ]
+            },
+            {
+                id: 13, title: "문화 에티켓: Do's (권장)",
+                content: `현지인들에게 존중받는 여행자가 되기 위한 작은 배려들입니다.`,
+                type: "checklist", // 체크리스트 UI 재활용
+                items: ["웃으며 '신짜오(안녕하세요)' 인사하기", "어르신께 먼저 인사하고 존댓말 쓰기 (문화적 존중)", "식당에서 젓가락을 그릇 위에 가지런히 놓기", "사유지 촬영 시 허락 구하기"]
+            },
+            {
+                id: 14, title: "문화 에티켓: Don'ts (금기)",
+                content: `무심코 한 행동이 큰 실례가 될 수 있습니다. 특히 종교와 관련된 부분은 주의해야 합니다.`,
+                type: "text",
+                points: ["사원에서 노출 심한 옷(민소매, 짧은 바지) 입지 않기", "사람의 머리를 만지지 않기 (영혼이 머무는 곳이라 여김)", "발바닥으로 사람이나 불상을 가리키지 않기", "공공장소에서 큰 소리로 화내지 않기"]
+            },
+            {
+                id: 15, title: "북부(하노이) 날씨 가이드",
+                content: `하노이에도 겨울이 있습니다. 12월~2월은 꽤 쌀쌀하므로 옷차림에 유의해야 합니다.`,
+                type: "chart",
+                chart: [{l: "1월 기온 (쌀쌀함)", v: 40}, {l: "4월 기온 (쾌적)", v: 70}, {l: "7월 기온 (찜통더위)", v: 95}, {l: "10월 기온 (여행최적)", v: 75}]
+            },
+            {
+                id: 16, title: "중·남부 날씨 및 옷차림",
+                content: `다낭과 호찌민은 일 년 내내 덥지만, 우기와 건기의 구분이 확실합니다. 우기에는 갑작스러운 스콜에 대비해야 합니다.`,
+                type: "table",
+                table: { head: ["지역", "건기 (여행 추천)", "우기 (비 주의)"], body: [["다낭 (중부)", "2월 ~ 8월", "9월 ~ 1월 (태풍 주의)"], ["호찌민 (남부)", "11월 ~ 4월", "5월 ~ 10월 (스콜성 비)"], ["나트랑 (중남부)", "1월 ~ 8월", "9월 ~ 12월"]] }
+            },
+            {
+                id: 17, title: "상황별 복장 추천",
+                content: `TPO에 맞는 복장은 여행의 편안함과 품격을 높여줍니다.`,
+                type: "accordion",
+                items: [
+                    {t: "🛕 사원 방문 시", c: "무릎과 어깨를 가리는 긴 바지나 롱 스커트. 얇은 가디건 지참 필수."},
+                    {t: "🏖️ 해변/리조트", c: "수영복, 비치웨어. 단, 시내를 활보할 땐 상의를 입는 것이 예의."},
+                    {t: "⛰️ 트레킹/투어", c: "편안한 운동화와 통기성 좋은 옷. 모기 방지용 얇은 긴 바지 추천."}
+                ]
+            },
+            {
+                id: 18, title: "푸꾸옥 럭셔리 리조트 비교",
+                content: `베트남의 몰디브라 불리는 푸꾸옥은 호캉스의 성지입니다. 여행 스타일에 맞는 리조트를 선택하세요.`,
+                type: "tabs",
+                tabs: [
+                    {name: "가족여행", content: "빈펄 리조트: 빈원더스, 사파리와 가까워 아이들이 좋아함."},
+                    {name: "커플/허니문", content: "리젠트/JW메리어트: 압도적인 럭셔리함과 프라이빗한 서비스."},
+                    {name: "가성비/우정", content: "노보텔/베스트웨스턴: 합리적인 가격과 넓은 수영장, 시내 접근성."}
+                ]
+            },
+            {
+                id: 19, title: "안전 여행: 감염병 예방",
+                content: `즐거운 여행을 위해 건강 관리는 필수입니다. 물과 모기를 특히 조심하세요.`,
+                type: "text",
+                points: ["물갈이 주의: 식당에서도 생수 마시기 (양치질도 생수 추천)", "식중독 예방: 길거리 음식은 회전율이 좋은 곳 선택", "비상약 준비: 지사제, 소화제, 해열제, 밴드"]
+            },
+            {
+                id: 20, title: "모기 매개 질병 대응",
+                content: `뎅기열은 백신이 없어 예방이 최선입니다. 모기 기피제를 수시로 뿌리고, 밝은 색 긴 옷을 착용하세요.`,
+                type: "checklist",
+                items: ["모기 기피제 3-4시간마다 덧바르기", "숙소 방충망 상태 확인하기", "해질녘 야외 활동 시 긴 옷 입기", "고열 발생 시 즉시 병원 방문하기"]
+            }
+        ];
+
+        // 2. 기능 구현 (Interactivity)
+        
+        let currentPage = 1;
+
+        function init() {
+            renderMenu();
+            loadPage(1);
+            
+            // 모바일 메뉴 토글
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                const sidebar = document.getElementById('sidebar');
+                if(sidebar.style.height === '100%') {
+                    sidebar.style.height = 'auto';
+                    sidebar.style.maxHeight = '60px';
+                } else {
+                    sidebar.style.height = '100%';
+                    sidebar.style.maxHeight = '100vh';
+                }
+            });
+        }
+
+        function renderMenu(filterText = '') {
+            const menuList = document.getElementById('menu-list');
+            menuList.innerHTML = '';
+            
+            db.forEach(item => {
+                if(item.title.includes(filterText) || filterText === '') {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span>${item.id}. ${item.title}</span>`;
+                    li.onclick = () => { loadPage(item.id); };
+                    if(item.id === currentPage) li.classList.add('active');
+                    menuList.appendChild(li);
+                }
+            });
+        }
+
+        function filterMenu() {
+            const text = document.getElementById('searchInput').value;
+            renderMenu(text);
+        }
+
+        function loadPage(id) {
+            currentPage = id;
+            renderMenu(document.getElementById('searchInput').value); // Update active state
+            
+            const data = db.find(p => p.id === id);
+            const container = document.getElementById('content-container');
+            document.getElementById('page-indicator').innerText = `${data.id} / 20 페이지`;
+
+            let interactiveHTML = '';
+
+            // 타입별 콘텐츠 생성
+            if(data.type === 'text') {
+                interactiveHTML = `<ul style="margin-top:20px;">${data.points.map(p => `<li>${p}</li>`).join('')}</ul>`;
+            } 
+            else if(data.type === 'table') {
+                interactiveHTML = `
+                    <table class="data-table">
+                        <thead><tr>${data.table.head.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+                        <tbody>${data.table.body.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+                    </table>`;
+            }
+            else if(data.type === 'chart') {
+                interactiveHTML = `
+                    <div class="chart-container">
+                        ${data.chart.map(c => `
+                            <div class="bar-group">
+                                <div class="bar-label"><span>${c.l}</span><span>${c.v}%</span></div>
+                                <div class="bar-bg"><div class="bar-fill" style="width:0%" data-width="${c.v}%"></div></div>
+                            </div>
+                        `).join('')}
+                    </div>`;
+                setTimeout(() => document.querySelectorAll('.bar-fill').forEach(b => b.style.width = b.dataset.width), 100);
+            }
+            else if(data.type === 'accordion') {
+                interactiveHTML = data.items.map(item => `
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+                            ${item.t} <span>▼</span>
+                        </div>
+                        <div class="accordion-body"><p>${item.c}</p></div>
+                    </div>
+                `).join('');
+            }
+            else if(data.type === 'tabs') {
+                interactiveHTML = `
+                    <div class="tabs">
+                        ${data.tabs.map((t, i) => `<button class="tab-btn ${i===0?'active':''}" onclick="switchTab(this, ${i})">${t.name}</button>`).join('')}
+                    </div>
+                    ${data.tabs.map((t, i) => `<div class="tab-content ${i===0?'active':''}" id="tab-${i}">${t.content}</div>`).join('')}
+                `;
+            }
+            else if(data.type === 'checklist') {
+                interactiveHTML = `<div style="margin-top:20px;">
+                    ${data.items.map(item => `
+                        <label class="checklist-item">
+                            <input type="checkbox" onchange="this.parentElement.classList.toggle('checked')">
+                            ${item}
+                        </label>
+                    `).join('')}
+                </div>`;
+            }
+            else if(data.type === 'calculator') {
+                interactiveHTML = `
+                    <div class="calc-wrapper">
+                        <div>
+                            <label style="display:block; margin-bottom:5px;">베트남 동 (VND)</label>
+                            <input type="number" class="calc-input" id="vndInput" value="100000" oninput="calc()">
+                        </div>
+                        <div style="font-size:2rem;">👉</div>
+                        <div>
+                            <label style="display:block; margin-bottom:5px;">한국 원 (KRW)</label>
+                            <div class="calc-input" style="background:#eee;" id="krwOutput">5,000</div>
+                        </div>
+                    </div>
+                    <p>※ 대략적인 계산(나누기 20)입니다. 실제 환율은 다를 수 있습니다.</p>
+                `;
+            }
+            else if(data.type === 'quiz') {
+                interactiveHTML = `
+                    <div style="text-align:center; padding:30px; background:rgba(0,137,123,0.1); border-radius:12px;">
+                        <h3>❓ 돌발 퀴즈</h3>
+                        <p style="font-size:1.2rem; font-weight:bold;">${data.quiz.q}</p>
+                        <button class="btn" onclick="showQuizAnswer('${data.quiz.a}')">정답 확인하기</button>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="page-card">
+                    <h1>${data.title}</h1>
+                    <p>${data.content}</p>
+                    ${interactiveHTML}
+                    <div style="margin-top:30px; text-align:right;">
+                        <button class="btn btn-outline" onclick="copyContent('${data.title} 핵심내용: ${data.content.substring(0,30)}...')">📋 내용 복사</button>
+                    </div>
+                </div>
+                <div style="height:50px;"></div>
+            `;
+        }
+
+        // 유틸리티 함수들
+        function nextPage() {
+            if(currentPage < db.length) loadPage(currentPage + 1);
+            else alert("마지막 페이지입니다.");
+        }
+
+        function toggleTheme() {
+            if(document.body.getAttribute('data-theme') === 'dark') {
+                document.body.removeAttribute('data-theme');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        function switchTab(btn, index) {
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const contents = parent.nextElementSibling.parentElement.querySelectorAll('.tab-content'); // 간단한 DOM 탐색
+            // 더 안전한 방법: container를 다시 렌더링하지 않고 DOM 조작. 여기서는 단순화를 위해 형제 요소 탐색
+            const wrapper = btn.closest('.page-card');
+            wrapper.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            wrapper.querySelector(`#tab-${index}`).classList.add('active');
+        }
+
+        function calc() {
+            const vnd = document.getElementById('vndInput').value;
+            const krw = Math.floor(vnd / 20); // 나누기 20 (가장 근사치)
+            document.getElementById('krwOutput').innerText = krw.toLocaleString();
+        }
+
+        function showQuizAnswer(answer) {
+            document.getElementById('modalTitle').innerText = "정답 확인";
+            document.getElementById('modalText').innerText = answer;
+            document.getElementById('quizModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('quizModal').style.display = 'none';
+        }
+
+        function copyContent(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("클립보드에 복사되었습니다!");
+            });
+        }
+
+        // 실행
+        init();
+
+        // 모바일 반응형 처리
+        window.addEventListener('resize', () => {
+            if(window.innerWidth > 768) {
+                document.getElementById('sidebar').style.height = '100%';
+                document.getElementById('sidebar').style.maxHeight = 'none';
+            }
+        });
+
+    </script>
+</body>
+</html>
