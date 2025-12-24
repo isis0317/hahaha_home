@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>베트남 음식 & 여행 가이드 슬라이드</title>
+    
+    <!-- Reveal.js CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Glassmorphism & Background Styling --- */
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Noto Sans KR', sans-serif !important;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Glass Panel Container --- */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 40px;
+            text-align: left;
+            margin: 20px auto;
+            max-width: 90%;
+        }
+
+        /* --- Typography Constraints (Requested: 24pt Title, 17pt Content) --- */
+        .reveal h1, .reveal h2, .reveal h3, .reveal .slide-title {
+            font-size: 24pt !important;
+            text-transform: none !important;
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            border-bottom: 2px solid rgba(255,255,255,0.5);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .reveal p, .reveal li, .reveal td, .reveal div {
+            font-size: 17pt !important;
+            line-height: 1.6 !important;
+            color: #f0f0f0 !important;
+        }
+
+        /* --- Interactive Elements Styling --- */
+        .reveal table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 17pt;
+        }
+        .reveal th {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px;
+        }
+        .reveal td {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 10px;
+        }
+        
+        /* Bar Chart CSS */
+        .bar-container {
+            margin-bottom: 15px;
+        }
+        .bar-label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .bar-bg {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 20px;
+            width: 100%;
+        }
+        .bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: #23d5ab;
+            width: 0%; /* Animated via JS */
+            transition: width 1.5s ease;
+        }
+
+        /* Currency Calculator */
+        .calc-input {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 10px;
+            font-size: 17pt;
+            border-radius: 5px;
+            width: 150px;
+        }
+        .calc-btn {
+            background: #23a6d5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 17pt;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        /* Highlights */
+        strong { color: #ffe082; }
+    </style>
+</head>
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- 1페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">1. 베트남 음식 문화의 기본 개념</h2>
+                    <ul>
+                        <li class="fragment fade-up"><strong>조리 원칙:</strong> 반드시 불을 사용하여 굽고, 삶고, 끓여 따뜻하게 섭취.</li>
+                        <li class="fragment fade-up"><strong>식재료:</strong> 날씨 영향으로 말린 재료도 가공 후 섭취.</li>
+                        <li class="fragment fade-up"><strong>주식(국수):</strong> 퍼(쌀국수), 미엔(당면), 미(노란 국수) 등 다양.</li>
+                        <li class="fragment fade-up"><strong>쌈 문화:</strong> 고기와 신선한 채소를 함께 싸 먹는 건강식.</li>
+                        <li class="fragment fade-up"><strong>지역성:</strong> 지형에 따라 식재료와 맛이 다양하게 나타남.</li>
+                    </ul>
+                    <p style="margin-top: 20px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        💡 <strong>요약:</strong> 고온다습한 기후를 이겨내기 위한 '따뜻한 조리법'과 '음양의 조화'가 핵심입니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 2페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">2. 설날 전통 음식 (반쯩과 반자이)</h2>
+                    <table class="fragment fade-in">
+                        <thead>
+                            <tr>
+                                <th>음식명</th>
+                                <th>형태</th>
+                                <th>상징</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>반쯩 (Bánh Chưng)</strong></td>
+                                <td>사각형</td>
+                                <td>땅, 음(-), 감사</td>
+                            </tr>
+                            <tr>
+                                <td><strong>반자이 (Bánh Giầy)</strong></td>
+                                <td>원형</td>
+                                <td>하늘, 양(+), 공경</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul>
+                        <li class="fragment">설날 '텟'을 상징하며 6시간 이상 쪄내는 정성.</li>
+                        <li class="fragment">흥왕 설화 기원: 쌀의 귀중함과 부모의 은혜 강조.</li>
+                        <li class="fragment">"반쯩이 없으면 설날이 아니다"라는 격언 존재.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">3. 일상식 껌판과 쌀국수(퍼)</h2>
+                    <ul>
+                        <li class="fragment"><strong>껌판:</strong> 밥, 생선조림, 국 등을 곁들인 베트남식 백반.</li>
+                        <li class="fragment"><strong>퍼(Phở):</strong> 쌀국수. 지역에 따라 스타일이 다름.</li>
+                    </ul>
+                    <div style="display:flex; gap:20px; margin-top:20px;">
+                        <div class="fragment" style="flex:1; background:rgba(255,255,255,0.1); padding:15px; border-radius:10px;">
+                            <strong>🍲 퍼보 (북부)</strong><br>
+                            쇠고기 육수, 깊고 진한 맛, 하노이 대표.
+                        </div>
+                        <div class="fragment" style="flex:1; background:rgba(255,255,255,0.1); padding:15px; border-radius:10px;">
+                            <strong>🐔 퍼가 (남부)</strong><br>
+                            닭고기 육수, 담백하고 깔끔, 전국적 인기.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">4. 라이스 페이퍼(반짱)와 반미</h2>
+                    <ul>
+                        <li class="fragment"><strong>반짱:</strong> 물에 적셔 먹거나(고이꾸온), 튀겨 먹는(짜조) 만능 재료.</li>
+                        <li class="fragment"><strong>소스:</strong> 젓갈 '맘' 또는 생선 소스 '늑맘'과 찰떡궁합.</li>
+                        <li class="fragment"><strong>반미:</strong> 프랑스 바게트 + 베트남 속재료의 완벽한 퓨전.</li>
+                    </ul>
+                    <div class="fragment" style="margin-top:15px;">
+                        <div class="bar-container">
+                            <span class="bar-label">반미 대중성</span>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="bar-container">
+                            <span class="bar-label">고이꾸온 신선함</span>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">5. 육류 및 생선 요리 특징</h2>
+                    <ul>
+                        <li class="fragment"><strong>과거:</strong> 농경 사회 특성상 소고기 섭취 자제.</li>
+                        <li class="fragment"><strong>현재:</strong> 돼지, 닭, 오리 등 일상적 소비 증가.</li>
+                        <li class="fragment"><strong>특징:</strong> 고산 지대 달랏의 소고기 품질 우수.</li>
+                        <li class="fragment"><strong>수산물:</strong> 3,260km 해안선 보유. 민물고기 요리 발달.</li>
+                    </ul>
+                    <p class="fragment" style="color:#ffe082;">※ 개고기는 특별한 날 수육 형태로 대접하는 전통 관습 존재.</p>
+                </div>
+            </section>
+
+            <!-- 6페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">6. 디저트와 음료 문화</h2>
+                    <ul>
+                        <li class="fragment"><strong>카페 쓰아:</strong> 프랑스 영향으로 진한 커피 + 연유.</li>
+                        <li class="fragment"><strong>차(Tea):</strong> 식후나 손님 접대 시 '타이구엔' 녹차 필수.</li>
+                        <li class="fragment"><strong>쩨(Chè):</strong> 콩, 쌀, 코코넛 밀크를 넣은 전통 디저트.</li>
+                        <li class="fragment"><strong>과일:</strong> 풍부한 열대 과일 주스와 스무디(신또).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 7페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">7. 지역별 대표 음식</h2>
+                    <table style="font-size: 15pt;">
+                        <thead><tr><th>지역</th><th>대표 음식</th><th>특징</th></tr></thead>
+                        <tbody>
+                            <tr class="fragment"><td><strong>호이안</strong></td><td>까오라우, 화이트로즈</td><td>일본/중국 융합, 쫄깃함</td></tr>
+                            <tr class="fragment"><td><strong>후에</strong></td><td>분보후에, 넴루이</td><td>매운맛, 왕실 요리 전통</td></tr>
+                            <tr class="fragment"><td><strong>하노이</strong></td><td>퍼보, 분짜</td><td>담백함, 재료 본연의 맛</td></tr>
+                            <tr class="fragment"><td><strong>호찌민</strong></td><td>껌땀, 반세오</td><td>달콤함, 풍부한 향신료</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 8페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">8. 베트남 음식 필수 어휘</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <h3 style="font-size: 20pt; border:none;">🥩 재료</h3>
+                            <ul>
+                                <li>Bò (소)</li>
+                                <li>Heo (돼지)</li>
+                                <li>Gà (닭)</li>
+                                <li>Tôm (새우)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 20pt; border:none;">🔥 조리법</h3>
+                            <ul>
+                                <li>Nướng (구이)</li>
+                                <li>Xào (볶음)</li>
+                                <li>Hấp (찜)</li>
+                                <li>Cơm (밥) / Phở (면)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="fragment" style="margin-top:10px;">Example: <strong>Cơm Sườn Nướng</strong> = 밥 + 갈비 + 구이</p>
+                </div>
+            </section>
+
+            <!-- 9페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">9. 다낭 5박 6일 추천 일정</h2>
+                    <ul>
+                        <li class="fragment"><strong>1~2일차 (다낭):</strong> 대성당, 한 시장, 용 다리 야경, 스파.</li>
+                        <li class="fragment"><strong>3일차 (이동):</strong> 오행산 관람 후 호이안으로 이동.</li>
+                        <li class="fragment"><strong>4~5일차 (호이안):</strong> 올드타운, 등불 야경, 코코넛 햇 투어.</li>
+                        <li class="fragment"><strong>6일차 (마무리):</strong> 바나 힐 테마파크, 롯데마트 쇼핑, 귀국.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 10페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">10. 여행 필수 준비물</h2>
+                    <ul style="list-style-type: '✅ ';">
+                        <li class="fragment"><strong>서류:</strong> 여권, 항공권 바우처, 유심/이심.</li>
+                        <li class="fragment"><strong>건강:</strong> 비상약(지사제, 해열제), 모기 기피제.</li>
+                        <li class="fragment"><strong>날씨:</strong> 선크림, 선글라스, 모자, 휴대용 선풍기.</li>
+                        <li class="fragment"><strong>금융:</strong> 동지갑(화폐 분류 파일), 100달러 신권.</li>
+                        <li class="fragment"><strong>의류:</strong> 얇은 겉옷 (실내 냉방 대비).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 11페이지 (인터랙티브 기능 포함) -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">11. 환전 및 예산 (계산기)</h2>
+                    <ul>
+                        <li>공식: <strong>(베트남 동 - 0) ÷ 2 = 대략 원화</strong></li>
+                        <li>팁: 한국서 달러 환전 → 현지 금은방서 동 환전 유리.</li>
+                    </ul>
+                    
+                    <div style="margin-top:30px; background:rgba(0,0,0,0.2); padding:20px; border-radius:10px;">
+                        <p>🧮 <strong>실시간 간편 계산</strong></p>
+                        <input type="number" id="vndInput" class="calc-input" placeholder="VND 입력" value="100000">
+                        <span style="font-size:17pt;"> 동 = </span>
+                        <span id="krwResult" style="color:#ffe082; font-weight:bold; font-size:20pt;">5,000</span>
+                        <span style="font-size:17pt;"> 원</span>
+                        <br><br>
+                        <button class="calc-btn" onclick="calculateCurrency()">계산하기</button>
+                    </div>
+                </div>
+                <script>
+                    function calculateCurrency() {
+                        const vnd = document.getElementById('vndInput').value;
+                        const krw = (vnd / 20).toLocaleString();
+                        document.getElementById('krwResult').innerText = krw;
+                    }
+                </script>
+            </section>
+
+            <!-- 12페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">12. 그랩(Grab) 이용과 에티켓</h2>
+                    <ul>
+                        <li class="fragment"><strong>그랩(Grab):</strong> 요금 확정제로 바가지 걱정 없음. 필수 앱.</li>
+                        <li class="fragment"><strong>이용 팁:</strong> 오후 2~5시는 더우니 실내 이동/휴식 권장.</li>
+                        <li class="fragment"><strong>교통 문화:</strong> 경적 소리에 화내지 말 것 (일상임).</li>
+                        <li class="fragment"><strong>길 건너기:</strong> 뛰지 말고 일정한 속도로 천천히 걷기.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 13페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">13. 문화 에티켓 - 해야 할 일</h2>
+                    <ul>
+                        <li class="fragment">😊 <strong>미소 & 인사:</strong> "Xin chao" 한마디의 힘.</li>
+                        <li class="fragment">👴 <strong>노인 공경:</strong> 어르신께 먼저 인사하고 존중 표하기.</li>
+                        <li class="fragment">📸 <strong>사진 촬영:</strong> 인물 촬영 전 반드시 허락 구하기.</li>
+                        <li class="fragment">🥢 <strong>식사 예절:</strong> 젓가락을 그릇에 세우지 않기.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 14페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">14. 문화 에티켓 - 하지 말아야 할 일</h2>
+                    <ul>
+                        <li class="fragment">🚫 <strong>노출 자제:</strong> 사원 방문 시 무릎/어깨 가리기.</li>
+                        <li class="fragment">🚫 <strong>터치 금지:</strong> 머리는 신성한 부위, 아이 머리 만지지 말 것.</li>
+                        <li class="fragment">🚫 <strong>발가락질:</strong> 발로 사람이나 물건 가리키기 금지.</li>
+                        <li class="fragment">🚫 <strong>민감 주제:</strong> 정치, 전쟁 관련 대화 피하기.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 15페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">15. 북부(하노이) 기후 가이드</h2>
+                    <table>
+                        <thead><tr><th>시기</th><th>기온</th><th>옷차림</th></tr></thead>
+                        <tbody>
+                            <tr class="fragment"><td><strong>12~2월</strong></td><td>15°C</td><td>두꺼운 재킷 (춥고 습함)</td></tr>
+                            <tr class="fragment"><td><strong>3~5월</strong></td><td>25°C</td><td>가벼운 긴팔 (여행 최적)</td></tr>
+                            <tr class="fragment"><td><strong>6~8월</strong></td><td>32°C</td><td>반팔, 우비 (덥고 폭우)</td></tr>
+                            <tr class="fragment"><td><strong>9~11월</strong></td><td>25°C</td><td>가벼운 외투 (가을 날씨)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 16페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">16. 중·남부 기후 가이드</h2>
+                    <ul>
+                        <li class="fragment"><strong>중부 (다낭):</strong> 2~8월 건기(폭염), 9~1월 우기(태풍 주의).</li>
+                        <li class="fragment"><strong>남부 (호찌민):</strong> 연중 덥음 (25~35°C).</li>
+                        <li class="fragment"><strong>남부 우기 (5~10월):</strong> 매일 오후 스콜성 소나기.</li>
+                        <li class="fragment"><strong>남부 건기 (11~4월):</strong> 맑고 쾌적, 여행 최적기.</li>
+                    </ul>
+                    <p class="fragment">👕 <strong>팁:</strong> 속건성 의류와 샌들이 우기에 유리합니다.</p>
+                </div>
+            </section>
+
+            <!-- 17페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">17. 성별 및 장소별 복장</h2>
+                    <ul>
+                        <li class="fragment"><strong>여성:</strong> 사원에서는 스카프/긴 치마 필수. 도심 탱크톱 지양.</li>
+                        <li class="fragment"><strong>남성:</strong> 공식적인 자리/사원에서는 긴 바지와 칼라 셔츠.</li>
+                        <li class="fragment"><strong>해변 외:</strong> 시내에서 상의 탈의나 수영복 차림은 금기.</li>
+                        <li class="fragment"><strong>아오자이:</strong> 착용 환영하나, 흰색(애도)은 피할 것.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 18페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">18. 푸꾸옥 럭셔리 리조트 비교</h2>
+                    <ul>
+                        <li class="fragment"><strong>멜리아 빈펄:</strong> 대가족, 빈원더스 접근성 좋음.</li>
+                        <li class="fragment"><strong>모벤픽:</strong> 스위스풍, 초콜릿 아워, 서양인 선호.</li>
+                        <li class="fragment"><strong>세일링 클럽:</strong> 힙한 분위기, 불쇼, 커플 추천.</li>
+                        <li class="fragment"><strong>리젠트:</strong> 최상급 럭셔리, 전 객실 스위트, 허니문.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 19페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">19. 감염병 예방 및 안전</h2>
+                    <ul>
+                        <li class="fragment"><strong>주의 질병:</strong> 세균성이질, 콜레라, 뎅기열, 홍역.</li>
+                        <li class="fragment"><strong>식수 위생:</strong> 반드시 끓인 물이나 생수 섭취 (얼음 주의).</li>
+                        <li class="fragment"><strong>예방 접종:</strong> 출국 전 홍역(MMR) 등 백신 확인.</li>
+                        <li class="fragment"><strong>귀국 후:</strong> 2주 내 발열 시 질병청(1339) 신고.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 20페이지 -->
+            <section>
+                <div class="glass-panel">
+                    <h2 class="slide-title">20. 모기 매개 감염병 예방</h2>
+                    <ul>
+                        <li class="fragment"><strong>위험:</strong> 뎅기열, 지카, 말라리아 등 (백신 없는 경우 많음).</li>
+                        <li class="fragment"><strong>예방 1:</strong> 밝은색 긴 옷 착용으로 노출 최소화.</li>
+                        <li class="fragment"><strong>예방 2:</strong> 모기 기피제 3~4시간 간격 사용.</li>
+                        <li class="fragment"><strong>조치:</strong> 여행 후 의심 증상 시 의료진에게 여행력 알리기.</li>
+                        <li class="fragment"><strong>헌혈:</strong> 귀국 후 일정 기간(1개월 이상) 헌혈 금지.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script>
+        // Reveal.js 초기화
+        Reveal.initialize({
+            controls: true, // 우측 하단 컨트롤 화살표
+            progress: true, // 하단 진행바
+            center: true,   // 슬라이드 중앙 정렬
+            hash: true,     // URL 해시 사용
+            transition: 'convex', // 슬라이드 전환 효과 (convex, zoom, fade, slide 등)
+            
+            // 모바일 터치 지원 강화
+            touch: true 
+        });
+
+        // 슬라이드 변경 시 바 차트 애니메이션 트리거
+        Reveal.on('slidechanged', event => {
+            const currentSlide = event.currentSlide;
+            const bars = currentSlide.querySelectorAll('.bar-fill');
+            bars.forEach(bar => {
+                // width를 0으로 초기화했다가 다시 채워서 애니메이션 효과
+                const targetWidth = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
