@@ -1,77 +1,127 @@
 <!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>생성형 AI 안내 페이지</title>
-  <style>
-    :root{--bg:#f7fafc;--card:#ffffff;--accent:#2563eb;--muted:#6b7280}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans',"Helvetica Neue",Arial;line-height:1.6;background:var(--bg);color:#111;margin:0}
-    .container{max-width:900px;margin:48px auto;padding:24px}
-    header{display:flex;align-items:center;gap:16px}
-    .logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,#60a5fa,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-    h1{font-size:1.6rem;margin:0}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,0.06);margin-top:18px}
-    h2{margin-top:0}
-    ul{padding-left:1.1rem}
-    footer{margin-top:28px;color:var(--muted);font-size:0.9rem}
-    @media (max-width:600px){.container{margin:20px;padding:16px}}
-    .badge{display:inline-block;padding:6px 10px;background:rgba(37,99,235,0.1);color:var(--accent);border-radius:999px;font-weight:600;font-size:0.85rem}
-  </style>
-</head>
-<body>
-  <main class="container">
-    <header>
-      <div class="logo">AI</div>
-      <div>
-        <h1>생성형 AI(Generative AI) 간단 안내</h1>
-        <div style="color:var(--muted);margin-top:6px">빠르게 이해하는 생성형 인공지능의 개념과 활용</div>
+<html lang="ko" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>생성형 AI 입문 — 원페이지 학습</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Tailwind config: enable class-based dark mode
+      tailwind.config = { darkMode: 'class' }
+    </script>
+
+    <meta name="description" content="생성형 AI 입문자용 원페이지 학습 사이트" />
+
+    <style>
+      html,body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+      /* custom gradient-border interaction for cards */
+      .card-effect{position:relative;border-radius:.75rem;overflow:hidden}
+      .card-effect::before{content:'';position:absolute;inset:0;padding:2px;border-radius:inherit;background:linear-gradient(135deg,transparent,transparent);-webkit-mask:linear-gradient(#fff,#fff) content-box, linear-gradient(#fff,#fff);mask:linear-gradient(#fff,#fff) content-box, linear-gradient(#fff,#fff);pointer-events:none;transition:all .35s ease}
+      .card-effect .inner{background:var(--card-bg);height:100%;display:block;padding:1.25rem;border-radius:calc(.75rem - 2px);transition:transform .28s ease}
+      .card-effect:hover::before{background:linear-gradient(90deg,#06b6d4,#8b5cf6)}
+
+      :root{--card-bg:#ffffff}
+      .dark :root{--card-bg:#0b1220}
+
+      /* 3D button */
+      .btn-3d{position:relative;display:inline-block;padding:.75rem 1.25rem;border-radius:.75rem;font-weight:700;transform-style:preserve-3d;transition:transform .12s ease,box-shadow .12s ease}
+      .btn-3d::after{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(0,0,0,0.12),transparent);z-index:-1;transform:translateZ(-8px) scale(.98);box-shadow:0 14px 30px rgba(37,99,235,0.12)}
+      .btn-3d:active{transform:translateY(2px)}
+
+      /* blur backdrop support for navbar */
+      .backdrop-blur{backdrop-filter: blur(8px)}
+    </style>
+  </head>
+
+  <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <!-- Sticky navbar -->
+    <nav class="sticky top-4 z-40 mx-auto max-w-6xl rounded-xl px-4 py-3 backdrop-blur bg-white/60 dark:bg-gray-900/60 shadow-md">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-gradient-to-br from-cyan-400 to-indigo-600 text-white font-extrabold">AI</div>
+          <div>
+            <div class="font-semibold">생성형 AI 입문</div>
+            <div class="text-xs text-gray-600 dark:text-gray-300">원페이지 학습 자료</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="#learn" class="text-sm text-gray-700 dark:text-gray-200 hover:underline">학습</a>
+          <a href="#topics" class="text-sm text-gray-700 dark:text-gray-200 hover:underline">주제</a>
+          <button id="themeToggle" aria-label="Toggle theme" class="ml-2 px-3 py-1 rounded-md bg-gray-100 dark:bg-gray-800 text-sm">다크/라이트</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header id="learn" class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">AI의 미래를 학습하세요</h1>
+          <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">생성형 AI의 원리와 실무 팁을 한 페이지로 요약한 입문 자료입니다.</p>
+
+          <div class="mt-8 flex items-center gap-4">
+            <a href="#topics" class="btn-3d inline-block bg-indigo-600 text-white px-5 py-3 rounded-lg shadow-sm hover:brightness-105">학습 시작</a>
+            <a href="#" class="text-sm text-gray-600 dark:text-gray-300">더 알아보기 →</a>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div class="w-full max-w-md p-6 rounded-2xl bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 shadow-lg transform rotate-1">
+            <img src="https://images.unsplash.com/photo-1558478551-1a378f63328d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="AI Illustration" class="rounded-xl w-full h-48 object-cover">
+          </div>
+        </div>
       </div>
     </header>
 
-    <section class="card">
-      <h2>생성이란 무엇인가?</h2>
-      <p>생성형 AI는 텍스트, 이미지, 오디오, 코드 등 새로운 콘텐츠를 만들어내는 모델을 말합니다. 대규모 데이터로 학습된 확률적 모델이 입력(프롬프트)에 따라 출력을 생성합니다.</p>
-    </section>
+    <!-- Topics grid -->
+    <main id="topics" class="mx-auto max-w-6xl px-6 pb-24">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="card-effect bg-transparent">
+          <div class="inner bg-white dark:bg-gray-800">
+            <h2 class="text-xl font-bold">LLM 원리</h2>
+            <p class="mt-3 text-gray-600 dark:text-gray-300">대규모 언어 모델은 토큰 단위 확률 예측을 통해 문맥을 생성합니다. 트랜스포머 아키텍처와 자기주의 메커니즘이 핵심입니다.</p>
+          </div>
+        </article>
 
-    <section class="card">
-      <h2>작동 원리(간단히)</h2>
-      <ul>
-        <li>학습: 방대한 데이터에서 패턴을 학습합니다.</li>
-        <li>예측: 다음 단어나 픽셀, 음향 등을 확률적으로 예측합니다.</li>
-        <li>생성: 연속 예측을 통해 완성된 문장, 이미지 등을 생성합니다.</li>
-      </ul>
-    </section>
+        <article class="card-effect bg-transparent">
+          <div class="inner bg-white dark:bg-gray-800">
+            <h2 class="text-xl font-bold">프롬프트 엔지니어링</h2>
+            <p class="mt-3 text-gray-600 dark:text-gray-300">명확한 지시, 예시 제공, 제약사항 명시는 더 정확한 출력을 얻는 핵심 기법입니다. 체인오브생각(Chain-of-Thought)을 활용해 단계별 추론을 유도하세요.</p>
+          </div>
+        </article>
 
-    <section class="card">
-      <h2>주요 활용 예</h2>
-      <ul>
-        <li>문서 작성 보조: 초안 생성, 요약, 번역</li>
-        <li>이미지 생성: 아이디어 시각화, 디자인 시안</li>
-        <li>코드 보조: 기능 구현 예시, 리팩터링 제안</li>
-        <li>대화형 에이전트: 고객 응대, 학습 보조</li>
-      </ul>
-    </section>
+        <article class="card-effect bg-transparent">
+          <div class="inner bg-white dark:bg-gray-800">
+            <h2 class="text-xl font-bold">AI 윤리</h2>
+            <p class="mt-3 text-gray-600 dark:text-gray-300">데이터 편향, 책임성, 저작권 문제를 고려해야 합니다. 생성 결과는 검증과 인간의 최종 검토가 필수입니다.</p>
+          </div>
+        </article>
+      </div>
+    </main>
 
-    <section class="card">
-      <h2>주의할 점</h2>
-      <ul>
-        <li>정확성: 생성 결과가 항상 정확하지 않을 수 있습니다.</li>
-        <li>편향과 윤리: 학습 데이터의 편향이 결과에 반영될 수 있습니다.</li>
-        <li>저작권 및 법적 문제: 생성 콘텐츠의 출처와 사용에 주의해야 합니다.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>빠른 팁</h2>
-      <p>명확한 프롬프트, 검증 루틴, 인간-검토를 결합하면 활용 효과를 높일 수 있습니다. 작은 실험을 통해 모델의 한계와 강점을 파악하세요.</p>
-      <div style="margin-top:12px"><span class="badge">예시 프롬프트</span> "제품 설명을 3문장으로 간결하게 작성해줘"</div>
-    </section>
-
-    <footer>
-      <div>참고: 이 페이지는 생성형 AI를 간단히 소개하기 위한 예시입니다.</div>
-      <div style="margin-top:6px">파일 위치: <a href="index.html">index.html</a></div>
+    <footer class="mx-auto max-w-6xl px-6 pb-12 text-center text-sm text-gray-600 dark:text-gray-400">
+      <div>© 2025 생성형 AI 입문 • 예시 페이지</div>
     </footer>
-  </main>
-</body>
+
+    <script>
+      // Theme toggle with persistence
+      const btn = document.getElementById('themeToggle');
+      const root = document.documentElement;
+      const saved = localStorage.getItem('theme');
+      if(saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+        root.classList.add('dark');
+      }
+      btn.addEventListener('click', ()=>{
+        root.classList.toggle('dark');
+        localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+      });
+    </script>
+  </body>
 </html>
