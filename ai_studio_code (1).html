@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>삼성화재 자동차보험 가이드 - 프리미엄 템플릿</title>
+    
+    <!-- Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-teal: #4FD1C5;
+            --dark-teal: #008080;
+            --bg-gray: #F8FAFC;
+            --text-title: #2C3E50;
+            --text-body: #4A5568;
+            /* 요청하신 폰트 사이즈 설정 */
+            --font-size-title: 32px; /* 24pt */
+            --font-size-body: 21px;  /* 16pt */
+        }
+
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: var(--bg-gray); }
+
+        /* Reveal.js 기본 스타일 강제 조정 */
+        .reveal { font-size: var(--font-size-body); color: var(--text-body); }
+        .reveal h2 { 
+            font-size: var(--font-size-title) !important; 
+            color: var(--text-title); 
+            font-weight: 700; 
+            margin-bottom: 40px !important;
+            text-transform: none;
+            display: inline-block;
+            border-bottom: 4px solid var(--primary-teal);
+            padding-bottom: 10px;
+        }
+
+        /* 슬라이드 공통 카드 스타일 */
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* 이미지 배경용 오버레이 */
+        .bg-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(79, 209, 197, 0.9), rgba(0, 128, 128, 0.9));
+            z-index: 1;
+        }
+
+        /* 대학생 템플릿 특유의 물결 배경 디자인 (SVG) */
+        .wave-bg {
+            position: absolute; bottom: 0; left: 0; width: 100%; z-index: 0;
+            opacity: 0.1;
+        }
+
+        /* 레이아웃 요소들 */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+
+        /* 템플릿의 서클 디자인 */
+        .circle-step {
+            width: 120px; height: 120px; border-radius: 50%;
+            background: var(--primary-teal); color: white;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            margin: 0 auto 20px; box-shadow: 0 5px 15px rgba(79, 209, 197, 0.4);
+        }
+        .circle-step i { font-size: 30px; margin-bottom: 5px; }
+        .step-num { font-family: 'Montserrat'; font-weight: 700; font-size: 14px; opacity: 0.8; }
+
+        /* 뱀 모양 타임라인 (Snake Line) */
+        .snake-line {
+            display: flex; justify-content: space-around; align-items: center;
+            position: relative; margin-top: 100px;
+        }
+        .snake-line::before {
+            content: ''; position: absolute; top: 50%; left: 10%; right: 10%;
+            height: 4px; background: #E2E8F0; z-index: 0;
+        }
+        .snake-node {
+            position: relative; z-index: 1; background: white; border: 4px solid var(--primary-teal);
+            width: 40px; height: 40px; border-radius: 50%;
+        }
+
+        /* 본문 텍스트 스타일 */
+        p, li { font-size: var(--font-size-body); line-height: 1.6; color: var(--text-body); text-align: left; }
+        .highlight { color: var(--dark-teal); font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Hero (템플릿 첫 페이지 스타일) -->
+            <section data-background-image="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1920">
+                <div class="bg-overlay" style="background: linear-gradient(135deg, #4FD1C5 0%, #008080 100%); opacity: 0.85;"></div>
+                <div style="position: relative; z-index: 2; text-align: left; padding-left: 100px;">
+                    <h1 style="color: white; font-family: 'Montserrat'; font-size: 80px; margin: 0;">SAMSUNG</h1>
+                    <h2 style="color: white; border: none; font-size: 40px !important; margin-bottom: 20px !important;">자동차보험 핵심 가이드</h2>
+                    <p style="color: white; opacity: 0.8; font-size: 24px;">2025 최신 약관 반영 및 보상 절차 안내</p>
+                    <div style="width: 100px; height: 8px; background: white; margin-top: 40px;"></div>
+                </div>
+            </section>
+
+            <!-- Slide 2: Table of Contents (원형 노드 스타일) -->
+            <section>
+                <div class="slide-container">
+                    <h2>CONTENTS</h2>
+                    <div class="grid-3" style="margin-top: 50px;">
+                        <div style="text-align: center;">
+                            <div class="circle-step"><i class="fas fa-car-burst"></i><span class="step-num">PART 01</span></div>
+                            <p style="text-align: center; font-weight: 700;">사고 현장 대처</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="circle-step" style="background: #2C3E50;"><i class="fas fa-file-shield"></i><span class="step-num">PART 02</span></div>
+                            <p style="text-align: center; font-weight: 700;">의무보험 및 보장</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="circle-step" style="background: #4A5568;"><i class="fas fa-hand-holding-heart"></i><span class="step-num">PART 03</span></div>
+                            <p style="text-align: center; font-weight: 700;">보험료 및 특약</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: 5-Step Process (사고 대처) -->
+            <section>
+                <div class="slide-container">
+                    <h2>사고 발생 시 5단계 현장 대처</h2>
+                    <div style="display: flex; justify-content: space-between; margin-top: 50px;">
+                        <div style="text-align: center; width: 18%;">
+                            <div style="font-family: Montserrat; color: var(--primary-teal); font-size: 40px; font-weight: 800;">01</div>
+                            <p style="font-size: 14px; text-align: center; font-weight: 700;">즉시 정차</p>
+                        </div>
+                        <div style="text-align: center; width: 18%;">
+                            <div style="font-family: Montserrat; color: var(--primary-teal); font-size: 40px; font-weight: 800;">02</div>
+                            <p style="font-size: 14px; text-align: center; font-weight: 700;">부상자 구호</p>
+                        </div>
+                        <div style="text-align: center; width: 18%;">
+                            <div style="font-family: Montserrat; color: var(--primary-teal); font-size: 40px; font-weight: 800;">03</div>
+                            <p style="font-size: 14px; text-align: center; font-weight: 700;">사진 촬영</p>
+                        </div>
+                        <div style="text-align: center; width: 18%;">
+                            <div style="font-family: Montserrat; color: var(--primary-teal); font-size: 40px; font-weight: 800;">04</div>
+                            <p style="font-size: 14px; text-align: center; font-weight: 700;">안전지대 이동</p>
+                        </div>
+                        <div style="text-align: center; width: 18%;">
+                            <div style="font-family: Montserrat; color: var(--primary-teal); font-size: 40px; font-weight: 800;">05</div>
+                            <p style="font-size: 14px; text-align: center; font-weight: 700;">삼성화재 접수</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 40px;">인명 사고 시 <span class="highlight">119 신고는 법적 의무</span>입니다. 구호 조치 후 삼성화재(1588-5114)로 연락하여 전문가의 도움을 받으세요.</p>
+                </div>
+            </section>
+
+            <!-- Slide 4: Digital Service (Grid Layout) -->
+            <section>
+                <div class="slide-container">
+                    <h2>디지털 약관 서비스 활용</h2>
+                    <div class="grid-2" style="margin-top: 30px;">
+                        <div style="background: #F7FAFC; padding: 20px; border-radius: 15px;">
+                            <p class="highlight"><i class="fas fa-qrcode"></i> QR코드 해설</p>
+                            <p>약관의 주요 내용을 영상으로 쉽게 설명해 드립니다.</p>
+                        </div>
+                        <div style="background: #F7FAFC; padding: 20px; border-radius: 15px;">
+                            <p class="highlight"><i class="fas fa-search"></i> 스마트 검색</p>
+                            <p>방대한 약관 내용 중 원하는 키워드를 즉시 찾을 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Mandatory Insurance (Wavy Timeline Style) -->
+            <section>
+                <div class="slide-container">
+                    <h2>의무보험 미가입 과태료 (자가용)</h2>
+                    <div class="snake-line">
+                        <div class="snake-node"></div>
+                        <div class="snake-node"></div>
+                        <div class="snake-node"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                        <p style="text-align: center;">10일 이내<br><span class="highlight">15,000원</span></p>
+                        <p style="text-align: center;">10일 초과(매일)<br><span class="highlight">6,000원 추가</span></p>
+                        <p style="text-align: center;">최고 한도<br><span class="highlight">900,000원</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Contract Check (Vertical Block Style) -->
+            <section>
+                <div class="slide-container">
+                    <div class="grid-2">
+                        <div>
+                            <h2>계약 시 필수 확인</h2>
+                            <ul>
+                                <li>운전자 범위 (가족/부부 등)</li>
+                                <li>연령 특약 (만 26세/30세 등)</li>
+                                <li><span class="highlight">고지의무</span> 준수 여부</li>
+                            </ul>
+                        </div>
+                        <div style="background: var(--dark-teal); color: white; border-radius: 15px; padding: 30px;">
+                            <i class="fas fa-exclamation-circle fa-2x"></i>
+                            <p style="color: white; margin-top: 20px;">고지의무 위반 시 보험사고 발생 후에도 보험금이 부지급되거나 계약이 해지될 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Claim Process (Timeline Style) -->
+            <section>
+                <div class="slide-container">
+                    <h2>보험금 청구 및 처리 절차</h2>
+                    <div class="grid-3" style="margin-top: 40px;">
+                        <div style="border-right: 2px dashed #CBD5E0; padding: 10px;">
+                            <h4 style="color: var(--dark-teal);">STEP 1</h4>
+                            <p>사고 접수 및<br>현장 출동</p>
+                        </div>
+                        <div style="border-right: 2px dashed #CBD5E0; padding: 10px;">
+                            <h4 style="color: var(--dark-teal);">STEP 2</h4>
+                            <p>사고 조사 및<br>과실 산정</p>
+                        </div>
+                        <div style="padding: 10px;">
+                            <h4 style="color: var(--dark-teal);">STEP 3</h4>
+                            <p>보험금 결정 및<br>최종 지급</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Personal vs Car Injury (Comparison Style) -->
+            <section>
+                <div class="slide-container">
+                    <h2>자기신체사고 vs 자동차상해</h2>
+                    <div class="grid-2" style="margin-top: 30px;">
+                        <div style="border: 2px solid #E2E8F0; padding: 20px; border-radius: 15px;">
+                            <h4 style="text-align: center;">자기신체사고</h4>
+                            <p>- 상해 등급별 한도 내 보상<br>- 치료비 위주 보상<br>- <span class="highlight">추천: 경제적 가입</span></p>
+                        </div>
+                        <div style="border: 4px solid var(--primary-teal); padding: 20px; border-radius: 15px; position: relative;">
+                            <span style="position: absolute; top: -15px; right: 10px; background: var(--primary-teal); color: white; padding: 2px 10px; font-size: 12px; border-radius: 10px;">BEST</span>
+                            <h4 style="text-align: center;">자동차상해</h4>
+                            <p>- 등급 무관 실제 손해 보상<br>- 위자료 + 휴업손해 포함<br>- <span class="highlight">추천: 든든한 보장</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Accident Records (Chart Style) -->
+            <section>
+                <div class="slide-container">
+                    <h2>물적사고 할증기준금액</h2>
+                    <div style="display: flex; align-items: flex-end; gap: 40px; height: 200px; margin-top: 50px; border-bottom: 2px solid #CBD5E0; padding-bottom: 5px;">
+                        <div style="width: 100px; height: 50%; background: #E2E8F0; border-radius: 5px 5px 0 0; text-align: center;"><p style="font-size: 12px;">50만원</p></div>
+                        <div style="width: 100px; height: 100%; background: var(--primary-teal); border-radius: 5px 5px 0 0; text-align: center;"><p style="font-size: 12px; color: white;">200만원</p></div>
+                    </div>
+                    <p style="margin-top: 30px;">수리비가 설정한 <span class="highlight">할증기준(통상 200만)</span>을 넘으면 다음 갱신 시 보험료가 크게 인상될 수 있습니다.</p>
+                </div>
+            </section>
+
+            <!-- Slide 10: Anycar Services (Grid/Icons) -->
+            <section>
+                <div class="slide-container">
+                    <h2>삼성화재 애니카 서비스 (연 6회)</h2>
+                    <div class="grid-3" style="margin-top: 40px; text-align: center;">
+                        <div><i class="fas fa-battery-three-quarters fa-2x" style="color: var(--primary-teal);"></i><p style="text-align: center;">배터리 충전</p></div>
+                        <div><i class="fas fa-gas-pump fa-2x" style="color: var(--primary-teal);"></i><p style="text-align: center;">비상 급유</p></div>
+                        <div><i class="fas fa-wrench fa-2x" style="color: var(--primary-teal);"></i><p style="text-align: center;">타이어 수리</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Liability I & II -->
+            <section>
+                <div class="slide-container">
+                    <h2>대인배상 Ⅰ (의무) & Ⅱ (선택)</h2>
+                    <p>대인배상 Ⅰ은 타인이 사망하거나 다친 경우 <span class="highlight">법적 한도 내</span>에서 보상합니다.</p>
+                    <p>대인배상 Ⅱ는 Ⅰ을 초과하는 손해를 <span class="highlight">무제한</span>으로 보장하여 형사 처벌 위험을 줄여줍니다.</p>
+                </div>
+            </section>
+
+            <!-- Slide 12: Property Damage -->
+            <section>
+                <div class="slide-container">
+                    <h2>대물배상 가입 한도</h2>
+                    <p>최근 고가 외제차와의 사고에 대비하여 가입 한도를 <span class="highlight">5억 원 이상</span>으로 설정하는 고객이 늘고 있습니다.</p>
+                    <div style="background: #F7FAFC; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                        <p style="font-size: 14px;">※ 의무 가입 한도는 2천만 원이지만, 실제 사고 시 턱없이 부족할 수 있습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 13: Minor Injury 2023 -->
+            <section>
+                <div class="slide-container">
+                    <h2>경상환자 치료비 본인부담 (2023~)</h2>
+                    <p>상해등급 12~14급 경상환자의 경우, <span class="highlight">본인 과실 비율</span>만큼은 본인의 보험으로 처리해야 합니다.</p>
+                    <p>또한 4주 초과 진료 시에는 반드시 진단서를 제출해야 합니다.</p>
+                </div>
+            </section>
+
+            <!-- Slide 14: Uninsured Motorist -->
+            <section>
+                <div class="slide-container">
+                    <h2>무보험자동차에 의한 상해</h2>
+                    <p>가해 차량이 뺑소니이거나 무보험인 경우, <span class="highlight">내 보험으로 먼저 보상</span>받을 수 있는 소중한 담보입니다.</p>
+                    <p>본인뿐만 아니라 배우자, 부모, 자녀까지 보호 범위에 포함됩니다.</p>
+                </div>
+            </section>
+
+            <!-- Slide 15: Minor Damage Repair -->
+            <section>
+                <div class="slide-container">
+                    <h2>경미손상 수리 기준</h2>
+                    <p>단순 긁힘, 코팅막 손상 등 경미한 사고는 부품 교체가 아닌 <span class="highlight">복원 수리(판금/도색)</span> 비용만 보상됩니다.</p>
+                    <p>이는 과잉 수리를 막아 전체 보험료 인상을 억제합니다.</p>
+                </div>
+            </section>
+
+            <!-- Slide 16: Legal Support Rider -->
+            <section>
+                <div class="slide-container">
+                    <h2>법률비용 지원 특약</h2>
+                    <p>중대 법규 위반 사고 시 발생하는 <span class="highlight">형사 합의금, 벌금, 변호사 선임 비용</span>을 보장하여 운전자의 경제적 부담을 덜어줍니다.</p>
+                </div>
+            </section>
+
+            <!-- Slide 17: Exclusions -->
+            <section>
+                <div class="slide-container">
+                    <h2>보상하지 않는 사항 (면책)</h2>
+                    <ul style="margin-top: 30px;">
+                        <li>피보험자의 <span class="highlight">고의</span>로 인한 사고</li>
+                        <li>영리 목적으로 요금을 받는 <span class="highlight">유상 운송</span></li>
+                        <li>전쟁, 지진 등 천재지변</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 18: Premium Discount Tips -->
+            <section>
+                <div class="slide-container">
+                    <h2>보험료 절약 꿀팁</h2>
+                    <div class="grid-3" style="margin-top: 40px;">
+                        <div style="text-align: center;"><i class="fas fa-tachometer-alt fa-2x"></i><p style="text-align: center;">마일리지 할인</p></div>
+                        <div style="text-align: center;"><i class="fas fa-video fa-2x"></i><p style="text-align: center;">블랙박스 할인</p></div>
+                        <div style="text-align: center;"><i class="fas fa-shield-alt fa-2x"></i><p style="text-align: center;">첨단안전장치 할인</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 19: Madymo System -->
+            <section>
+                <div class="slide-container">
+                    <h2>마디모(MADYMO) 프로그램</h2>
+                    <p>충돌 속도가 매우 낮아 상해 가능성이 희박한 경우, 경찰에 의뢰하여 <span class="highlight">공학적 분석</span>을 통해 허위 환자를 가려내는 제도입니다.</p>
+                </div>
+            </section>
+
+            <!-- Slide 20: Thank You (템플릿 마지막 페이지 스타일) -->
+            <section data-background-image="https://images.unsplash.com/photo-1512428559083-a401c33c46d5?q=80&w=1920">
+                <div class="bg-overlay" style="background: linear-gradient(135deg, #2C3E50 0%, #000000 100%); opacity: 0.9;"></div>
+                <div style="position: relative; z-index: 2; text-align: center;">
+                    <h2 style="color: white; border: none; font-size: 60px !important;">THANK YOU</h2>
+                    <p style="color: white; text-align: center; opacity: 0.7;">삼성화재는 언제나 고객님의 안전 운행을 응원합니다.</p>
+                    <p style="color: var(--primary-teal); text-align: center; font-weight: 700; margin-top: 50px;">사고접수/애니카 서비스: 1588-5114</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            width: 1200,
+            height: 700,
+            margin: 0.05,
+            transition: 'slide'
+        });
+    </script>
+</body>
+</html>
